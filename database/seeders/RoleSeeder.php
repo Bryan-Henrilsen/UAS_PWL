@@ -6,7 +6,7 @@ use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use App\Models\User;
-
+//
 class RoleSeeder extends Seeder
 {
     public function run(): void
@@ -84,32 +84,32 @@ class RoleSeeder extends Seeder
         
         // Akun Admin
         $admin = User::create([
-            'name' => 'Boss Admin',
-            'email' => 'admin@toko.com',
+            'name' => 'Owner Toko',
+            'username' => 'owner',
             'password' => bcrypt('12345'),
         ]);
         $admin->assignRole('Super Admin');
 
         // Akun SPV
         $spv = User::create([
-            'name' => 'Ibu Supervisor',
-            'email' => 'spv@toko.com',
+            'name' => 'Bryan Henrilsen',
+            'username' => 'Bryan SPV',
             'password' => bcrypt('12345'),
         ]);
         $spv->assignRole('Supervisor');
 
         // Akun Staff Masuk
         $staffIn = User::create([
-            'name' => 'Budi Inbound',
-            'email' => 'budi@toko.com',
+            'name' => 'Dhavid Bhertus',
+            'username' => 'Dhavid Inbound',
             'password' => bcrypt('12345'),
         ]);
         $staffIn->assignRole('Staff Inbound');
 
         // Akun Staff Keluar
         $staffOut = User::create([
-            'name' => 'Siti Outbound',
-            'email' => 'siti@toko.com',
+            'name' => 'Felix Filbert',
+            'username' => 'Felix Outbound',
             'password' => bcrypt('12345'),
         ]); 
         $staffOut->assignRole('Staff Outbound');
