@@ -73,6 +73,7 @@
             </div>
         </div>
 
+        @canany(['approve_inbound'])
         @if($inboundRequestedCount > 0 || $outboundRequestedCount > 0)
         <h5 class="mb-3 mt-4 text-warning"><i class="fas fa-exclamation-circle me-2"></i>Perlu Tindakan (Pending)</h5>
         <div class="row">
@@ -88,7 +89,6 @@
                             <i class="fas fa-arrow-down fa-lg"></i>
                         </div>
                     </div>
-                    @canany(['approve_inbound', 'create_inbound'])
                     <div class="card-footer bg-warning bg-opacity-10 border-0 text-center">
                         <a href="{{ route('inbounds.index') }}" class="text-warning fw-bold text-decoration-none small stretched-link">
                             Lihat Detail <i class="fas fa-arrow-right ms-1"></i>
@@ -97,7 +97,8 @@
                     @endcanany
                 </div>
             </div>
-
+            
+            @canany(['approve_outbound'])
             <div class="col-md-6">
                 <div class="card border-warning mb-3">
                     <div class="card-body d-flex justify-content-between align-items-center">
@@ -110,21 +111,23 @@
                             <i class="fas fa-truck-loading fa-lg"></i>
                         </div>
                     </div>
-                    @canany(['approve_outbound', 'create_outbound'])
                     <div class="card-footer bg-warning bg-opacity-10 border-0 text-center">
                         <a href="{{ route('outbounds.index') }}" class="text-warning fw-bold text-decoration-none small stretched-link">
                             Lihat Detail <i class="fas fa-arrow-right ms-1"></i>
                         </a>
                     </div>
-                    @endcanany
+                    
                 </div>
             </div>
         </div>
+        @endcanany
+        @canany(['approve_outbound'])
         @else
             <div class="alert alert-light border mt-4 text-center text-muted">
                 <i class="fas fa-check-double text-success me-2"></i> Tidak ada transaksi yang menunggu persetujuan (Pending) saat ini.
             </div>
         @endif
     </div>
+    @endcanany
 </div>
 @endsection

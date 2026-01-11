@@ -21,7 +21,7 @@
                 
                 <div class="mb-3">
                     <label>SKU Base (Kode Induk)</label>
-                    <input type="text" class="form-control bg-light" value="{{ $product->sku_base }}" readonly title="Tidak bisa diubah">
+                    <input type="text" name="sku_base" class="form-control bg-light" value="{{ $product->sku_base }}" readonly>
                     <small class="text-muted">SKU Base tidak dapat diubah.</small>
                 </div>
                 

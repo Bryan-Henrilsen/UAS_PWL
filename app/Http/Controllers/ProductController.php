@@ -6,6 +6,7 @@ use App\Models\Product;
 use App\Models\ProductVariant;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
@@ -101,7 +102,7 @@ class ProductController extends Controller
 
         $request->validate([
             'name' => 'required|string|max:100',
-            'sku_base' => 'required|string|unique:products,sku_base|max:50',
+            'sku_base' => 'required|string|max:50|unique:products,sku_base,' . $id,
             'photo_main' => 'nullable|image|max:2048',
 
             // Validasi Array Varians
@@ -148,6 +149,7 @@ class ProductController extends Controller
 
         } catch (\Exception $e) {
             DB::rollback();
+            Log::info($e);
             return back()->with('error', 'Gagal update: ' . $e->getMessage());
         }
     }

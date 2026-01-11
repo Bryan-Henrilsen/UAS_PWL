@@ -25,9 +25,9 @@
                     <th width="5%">No</th>
                     <th>Nama Produk</th>
                     <th>Varian (Warna/Size)</th>
-                    <th class="text-end">Harga Beli/Aset (Rp)</th>
+                    <th class="text-end">Harga Jual/Aset (Rp)</th>
                     <th class="text-center">Stok Fisik</th>
-                    <th class="text-end">Total Nilai Aset (Rp)</th>
+                    <th class="text-end">Total Nilai Jual/Aset (Rp)</th>
                 </tr>
             </thead>
             <tbody>

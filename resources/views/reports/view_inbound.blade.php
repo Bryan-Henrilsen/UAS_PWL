@@ -27,7 +27,7 @@
                     <th>Tanggal</th>
                     <th>No. Transaksi</th>
                     <th>Staff Gudang</th>
-                    <th>Detail Barang</th>
+                    <th width="40%">Detail Barang (Harga Beli)</th>
                     <th class="text-end">Total Nominal</th>
                 </tr>
             </thead>
@@ -38,12 +38,15 @@
                     <td><span class="badge bg-secondary">#{{ $in->id }}</span></td>
                     <td>{{ $in->requester->name }}</td>
                     <td>
-                        <ul class="mb-0 ps-3 small">
+                        <ul class="mb-0 ps-3">
                         @foreach($in->details as $d)
-                            <li>
-                                {{ $d->variant->product->name }} 
-                                ({{ $d->variant->color }}/{{ $d->variant->size }}) 
-                                : <strong>{{ $d->qty }} pcs</strong>
+                            <li class="mb-1">
+                                <span class="fw-bold">{{ $d->variant->product->name }}</span> 
+                                ({{ $d->variant->color }}/{{ $d->variant->size }}) <br>
+                                <small class="text-muted">
+                                    {{ $d->qty }} pcs x Rp {{ number_format($d->unit_price, 0, ',', '.') }} 
+                                    = <strong>Rp {{ number_format($d->subtotal, 0, ',', '.') }}</strong>
+                                </small>
                             </li>
                         @endforeach
                         </ul>

@@ -3,11 +3,14 @@
 <head>
     <title>Laporan Barang Masuk</title>
     <style>
-        body { font-family: sans-serif; font-size: 10pt; }
+        body { font-family: sans-serif; font-size: 9pt; }
         table { width: 100%; border-collapse: collapse; margin-top: 10px; }
-        th, td { border: 1px solid #333; padding: 4px; }
-        th { background-color: #ddd; }
+        th, td { border: 1px solid #333; padding: 5px; vertical-align: top; }
+        th { background-color: #eee; text-align: center; font-weight: bold; }
         .header { text-align: center; margin-bottom: 20px; }
+        .text-right { text-align: right; }
+        .text-center { text-align: center; }
+        ul { margin: 0; padding-left: 15px; }
     </style>
 </head>
 <body>
@@ -19,34 +22,40 @@
     <table>
         <thead>
             <tr>
-                <th>Tanggal</th>
-                <th>No. Transaksi</th>
-                <th>Staff</th>
-                <th>Item Barang (Varian : Qty)</th>
-                <th>Total Nominal</th>
+                <th width="12%">Tanggal</th>
+                <th width="12%">No. Transaksi</th>
+                <th width="15%">Staff</th>
+                <th>Detail Item (Harga Beli)</th>
+                <th width="18%">Total Nominal</th>
             </tr>
         </thead>
         <tbody>
             @foreach($inbounds as $in)
             <tr>
-                <td>{{ $in->inbound_date->format('d/m/Y') }}</td>
-                <td>ID: {{ $in->id }}</td>
+                <td class="text-center">{{ $in->inbound_date->format('d/m/Y') }}</td>
+                <td class="text-center">#{{ $in->id }}</td>
                 <td>{{ $in->requester->name }}</td>
                 <td>
-                    <ul style="margin: 0; padding-left: 15px;">
+                    <ul style="list-style-type: none; padding-left: 0;">
                     @foreach($in->details as $d)
-                        <li>{{ $d->variant->product->name }} ({{ $d->variant->size }}) : <b>{{ $d->qty }} pcs</b></li>
+                        <li style="margin-bottom: 4px;">
+                            <b>{{ $d->variant->product->name }}</b> ({{ $d->variant->size }}) <br>
+                            <small style="color: #555;">
+                                {{ $d->qty }} pcs x Rp {{ number_format($d->unit_price, 0, ',', '.') }} 
+                                = <b>Rp {{ number_format($d->subtotal, 0, ',', '.') }}</b>
+                            </small>
+                        </li>
                     @endforeach
                     </ul>
                 </td>
-                <td style="text-align: right;">Rp {{ number_format($in->total_amount, 0, ',', '.') }}</td>
+                <td class="text-right">Rp {{ number_format($in->total_amount, 0, ',', '.') }}</td>
             </tr>
             @endforeach
         </tbody>
         <tfoot>
             <tr>
-                <th colspan="4" style="text-align: right;">GRAND TOTAL PERIODE INI</th>
-                <th style="text-align: right;">Rp {{ number_format($totalNominal, 0, ',', '.') }}</th>
+                <th colspan="4" class="text-right">GRAND TOTAL PERIODE INI</th>
+                <th class="text-right">Rp {{ number_format($totalNominal, 0, ',', '.') }}</th>
             </tr>
         </tfoot>
     </table>
